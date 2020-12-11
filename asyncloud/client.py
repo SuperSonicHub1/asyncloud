@@ -10,19 +10,19 @@ import asyncio
 from typing import Optional, List
 
 
-async def gen_client_id(self, client: ClientSession) -> str:
+async def gen_client_id(client: ClientSession) -> str:
     key = ""
 
-    async with self.session.get(BASE_URL) as res:
-        soup = BeautifulSoup(res.content, "lxml")
+    async with client.get(BASE_URL) as res:
+        soup = BeautifulSoup(await res.text(), "lxml")
         urls: List[str] = [
             script["src"]
-            for script in soup.select_all("script[crossorigin]")
+            for script in soup.select("script[crossorigin]")
             if SOUNDCLOUD_KEYGEN_URL_REGEX.match(script["src"])
         ]
 
     for url in urls:
-        async with self.session.get(url) as res:
+        async with client.get(url) as res:
             data = await res.text()
             if ',client_id:"' in data:
                 a = data.split(',client_id:"')
