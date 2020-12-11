@@ -66,3 +66,14 @@ async def test_resolve():
         client = asyncloud.SoundCloud(client_id, session)
         album = await client.resolve(url)
     assert album.id == 1173509695
+
+@pytest.mark.asyncio
+async def test_playlist():
+    """
+    https://soundcloud.com/com-truise/sets/galactic-melt-1
+    """
+    async with ClientSession(raise_for_status=True) as session:
+        client_id = await asyncloud.gen_client_id(session)
+        client = asyncloud.SoundCloud(client_id, session)
+        album = await client.playlist(331154216)
+    assert album.id == 331154216

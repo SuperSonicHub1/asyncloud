@@ -77,3 +77,8 @@ class SoundCloud:
         )
         async with self.session.get(url) as res:
             return SimpleNamespace(**(await res.json()))
+
+    async def playlist(self, playlist_id: int) -> SimpleNamespace:
+        url = BASE_API_URL / "playlists" / str(playlist_id) % {"client_id": self.client_id}
+        async with self.session.get(url) as res:
+            return SimpleNamespace(**(await res.json()))
