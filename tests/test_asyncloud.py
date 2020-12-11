@@ -43,6 +43,8 @@ async def test_track():
 async def test_tracks():
     """
     https://api-v2.soundcloud.com/tracks?ids=597556383,650566580
+    https://soundcloud.com/tahutoa/tainted-love-by-soft-shell
+    https://soundcloud.com/uun4/something-arrived-in-hell-today
     """
     track_ids = [597556383, 650566580]
     async with ClientSession(raise_for_status=True) as session:
@@ -51,6 +53,7 @@ async def test_tracks():
         tracks = await client.tracks(track_ids)
     for index, track in enumerate(tracks):
         assert track["id"] == track_ids[index]
+
 
 @pytest.mark.asyncio
 async def test_resolve():

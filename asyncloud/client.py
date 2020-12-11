@@ -29,16 +29,27 @@ class SoundCloud:
         url = BASE_API_URL / "tracks" / str(track_id) % {"client_id": self.client_id}
         async with self.session.get(url) as res:
             return await res.json()
-    
+
     async def tracks(self, track_ids: List[int]) -> List[dict]:
         """
         Returns multiple tracks.
         """
-        url = BASE_API_URL / "tracks" % {"ids": ",".join([str(track_id) for track_id in track_ids]), "client_id": self.client_id}
+        url = (
+            BASE_API_URL
+            / "tracks"
+            % {
+                "ids": ",".join([str(track_id) for track_id in track_ids]),
+                "client_id": self.client_id,
+            }
+        )
         async with self.session.get(url) as res:
             return await res.json()
-    
+
     async def resolve(self, resource_url: str) -> dict:
-        url = BASE_API_URL / "resolve" % {"url": resource_url, "client_id": self.client_id}
+        url = (
+            BASE_API_URL
+            / "resolve"
+            % {"url": resource_url, "client_id": self.client_id}
+        )
         async with self.session.get(url) as res:
             return await res.json()
