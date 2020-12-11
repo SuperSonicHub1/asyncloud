@@ -1,4 +1,21 @@
 * Create awesome classes to handle other endpoints for tracks, sets, and artists
 * Endpoints to handle
     * Search suggestions
-        * https://api-v2.soundcloud.com/search/queries?q=hello&limit=10&offset=0
+        * https://api-v2.soundcloud.com/search/queries?q=hello
+    * Front page tracks
+        * https://api-v2.soundcloud.com/featured_tracks/top/all-music
+    * Mixed selections
+        * https://api-v2.soundcloud.com/mixed-selections
+    * System playlists
+        * https://api-v2.soundcloud.com/system-playlists/soundcloud:system-playlists:charts-trending:drumbass:us
+    * Charts
+        * https://soundcloud.com/charts/top
+    * Popular searches
+        * https://soundcloud.com/popular/searches
+    * Search
+        * https://api-v2.soundcloud.com/search?q=search
+* Add support for linked partitioning
+    * URL Parameters
+        * linked_partioning
+        * offset
+        * limit
