@@ -24,7 +24,7 @@ async def test_user():
         client_id = await asyncloud.gen_client_id(session)
         client = asyncloud.SoundCloud(client_id, session)
         user = await client.user(468563046)
-    assert user["id"] == 468563046
+    assert user.id == 468563046
 
 
 @pytest.mark.asyncio
@@ -36,7 +36,7 @@ async def test_track():
         client_id = await asyncloud.gen_client_id(session)
         client = asyncloud.SoundCloud(client_id, session)
         track = await client.track(654315092)
-    assert track["id"] == 654315092
+    assert track.id == 654315092
 
 
 @pytest.mark.asyncio
@@ -52,7 +52,7 @@ async def test_tracks():
         client = asyncloud.SoundCloud(client_id, session)
         tracks = await client.tracks(track_ids)
     for index, track in enumerate(tracks):
-        assert track["id"] == track_ids[index]
+        assert track.id == track_ids[index]
 
 
 @pytest.mark.asyncio
@@ -65,4 +65,4 @@ async def test_resolve():
         client_id = await asyncloud.gen_client_id(session)
         client = asyncloud.SoundCloud(client_id, session)
         album = await client.resolve(url)
-    assert album["id"] == 1173509695
+    assert album.id == 1173509695

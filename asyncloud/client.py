@@ -2,6 +2,7 @@ from aiohttp import ClientSession
 from .constants import BASE_API_URL
 import asyncio
 from typing import Optional, List
+from types import SimpleNamespace
 
 
 class SoundCloud:
@@ -14,23 +15,23 @@ class SoundCloud:
         self.session = session
         self.client_id = client_id
 
-    async def user(self, user_id: int) -> dict:
+    async def user(self, user_id: int) -> SimpleNamespace:
         """
         Returns a user.
         """
         url = BASE_API_URL / "users" / str(user_id) % {"client_id": self.client_id}
         async with self.session.get(url) as res:
-            return await res.json()
+            return SimpleNamespace(**(await res.json()))
 
-    async def track(self, track_id: int) -> dict:
+    async def track(self, track_id: int) -> SimpleNamespace:
         """
         Returns a track.
         """
         url = BASE_API_URL / "tracks" / str(track_id) % {"client_id": self.client_id}
         async with self.session.get(url) as res:
-            return await res.json()
+            return SimpleNamespace(**(await res.json()))
 
-    async def tracks(self, track_ids: List[int]) -> List[dict]:
+    async def tracks(self, track_ids: List[int]) -> List[SimpleNamespace]:
         """
         Returns multiple tracks.
         """
@@ -43,13 +44,13 @@ class SoundCloud:
             }
         )
         async with self.session.get(url) as res:
-            return await res.json()
+            return [SimpleNamespace(**track) for track in (await res.json())]
 
-    async def resolve(self, resource_url: str) -> dict:
+    async def resolve(self, resource_url: str) -> SimpleNamespace:
         url = (
             BASE_API_URL
             / "resolve"
             % {"url": resource_url, "client_id": self.client_id}
         )
         async with self.session.get(url) as res:
-            return await res.json()
+            return SimpleNamespace(**(await res.json()))
