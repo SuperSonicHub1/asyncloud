@@ -70,15 +70,24 @@ class SoundCloud:
         Returns:
             SimpleNamespace: SoundCloud resource
         """
-        url = (
-            BASE_API_URL
-            / "resolve"
-            % {"url": sc_url, "client_id": self.client_id}
-        )
+        url = BASE_API_URL / "resolve" % {"url": sc_url, "client_id": self.client_id}
         async with self.session.get(url) as res:
             return SimpleNamespace(**(await res.json()))
 
     async def playlist(self, playlist_id: int) -> SimpleNamespace:
-        url = BASE_API_URL / "playlists" / str(playlist_id) % {"client_id": self.client_id}
+        """Returns a set.
+
+        Args:
+            playlist_id (int): SoundCloud set ID
+
+        Returns:
+            SimpleNamespace: Set
+        """
+        url = (
+            BASE_API_URL
+            / "playlists"
+            / str(playlist_id)
+            % {"client_id": self.client_id}
+        )
         async with self.session.get(url) as res:
             return SimpleNamespace(**(await res.json()))
