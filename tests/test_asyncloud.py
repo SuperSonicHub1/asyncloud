@@ -1,4 +1,4 @@
-from asyncloud import __version__
+from asyncloud import __version__, SoundCloud
 
 
 def test_version():
