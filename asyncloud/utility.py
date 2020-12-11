@@ -1,6 +1,6 @@
 from aiohttp import ClientSession
 from bs4 import BeautifulSoup, Tag
-from .constants import SOUNDCLOUD_KEYGEN_URL_REGEX, SOUNDCLOUD_API_KEY_REGEX, BASE_URL
+from .constants import SOUNDCLOUD_KEYGEN_URL_REGEX, BASE_URL
 from typing import List
 
 async def gen_client_id(client: ClientSession) -> str:
