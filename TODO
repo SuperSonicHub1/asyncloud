@@ -1,0 +1,4 @@
+* Create awesome classes to handle other endpoints for tracks, sets, and artists
+* Endpoints to handle
+    * Search suggestions
+        * https://api-v2.soundcloud.com/search/queries?q=hello&limit=10&offset=0
