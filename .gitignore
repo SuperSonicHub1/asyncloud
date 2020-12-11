@@ -1,2 +1,5 @@
 # VS Code
 .vscode
+
+# MyPy
+.mypy_cache
