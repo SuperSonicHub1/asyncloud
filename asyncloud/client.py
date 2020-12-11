@@ -33,6 +33,12 @@ class SoundCloud:
     async def tracks(self, track_ids: List[int]) -> List[dict]:
         """
         Returns multiple tracks.
-        https://api-v2.soundcloud.com/tracks?ids=597556383,650566580,654315092,656196194,676168613,679236228,685073137,694108864,716251402
         """
-        pass
+        url = BASE_API_URL / "tracks" % {"ids": ",".join([str(track_id) for track_id in track_ids]), "client_id": self.client_id}
+        async with self.session.get(url) as res:
+            return await res.json()
+    
+    async def resolve(self, resource_url: str) -> dict:
+        url = BASE_API_URL / "resolve" % {"url": resource_url, "client_id": self.client_id}
+        async with self.session.get(url) as res:
+            return await res.json()
